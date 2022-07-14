@@ -1,6 +1,12 @@
-terraform{
-
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
 }
+
 
 provider "aws"{
     region = "us-east-1"
@@ -10,18 +16,21 @@ provider "aws"{
 resource "aws_instance" "new"{
     ami = var.ami_id
     instance_type = var.instance_type
-    subnet_id = aws_subnet.private_subnet.ami_id
+    subnet_id = aws_subnet.private_subnet.id
     tags = {
         "Name": "private instance"
     }
 }
 
 data "aws_vpc" "default_vpc"{
-    vpc_id = "vpc-0714ac9c0ba61390b"
+    id = var.vpc_id
 }
 
 resource "aws_subnet" "private_subnet"{
-    vpc_id = default_vpc.vpc_id
-    cidr_block = "172.31.1.0"
+    vpc_id = data.aws_vpc.default_vpc.id
+    cidr_block = "172.31.100.0/24"
+    tags = {
+        Name = "private subnet" 
+    }
 }
 

@@ -1,0 +1,1 @@
+In this example, i used data block to get the resource(vpc) which is already provisioned in the infrastructure manually via aws console, and used the resources information to provision an new subnet and new ec2 instance in that vpc
