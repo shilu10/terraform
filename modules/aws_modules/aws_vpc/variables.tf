@@ -107,3 +107,82 @@ variable "egress_security_group_rules" {
 
   }]
 }
+
+variable "single_nat_gateway" {
+  type        = bool
+  default     = false
+  description = "Allows user to have a single nat gateway for all of their subnets"
+}
+
+variable "nat_gateway_for_each_subnet" {
+  type        = bool
+  default     = false
+  description = "Allows users to have one gateway for eahc subnet their created"
+}
+
+variable "manage_default_network_acl" {
+  type        = bool
+  default     = false
+  description = "To manage a default network access control list for all of the subnets"
+}
+
+variable "default_ingress_nacl_rules" {
+  type        =  list(map(string))
+  default     = [{}]
+  description = "this is used to maintain a default network access list rules"
+}
+
+variable "default_egress_nacl_rules" {
+  type        =   list(map(string))
+  default     = [{}]
+  description = "this is used to maintain a default network access list rules"
+}
+
+variable "create_inbound_sg_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "This is used to create a new ingress security group rules, which is non-default."
+}
+
+variable "create_outbound_sg_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "This is used to create a new egress security group rules, which is non-default."
+}
+
+variable "public_dedicated_network_acl" {
+  type        = bool
+  default     = false
+  description = "This allow you to create a single acl for all the public subnets"
+}
+
+variable "private_dedicated_network_acl" {
+  type        = bool
+  default     = false
+  description = "This allow you to create a single acl for all the private subnets"
+}
+
+variable "public_inbound_acl_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "this allow you to write a inbound acl rule for all the public subnets"
+}
+
+variable "public_outbound_acl_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "this allow you to write a outbound acl rule for all the public subnets"
+}
+
+variable "private_inbound_acl_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "this allow you to write a inbound acl rule for all the private subnets "
+}
+
+variable "private_outbound_acl_rules" {
+  type        = list(map(string))
+  default     = [{}]
+  description = "this allow you to write a outbound acl rule for all the private subnets"
+}
+
